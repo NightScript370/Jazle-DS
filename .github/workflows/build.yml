@@ -22,10 +22,6 @@ jobs:
       - uses: denoland/setup-deno@v1
         with:
           deno-version: vx.x.x
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          check-latest: true
       - uses: actions/setup-python@v3
         with:
           python-version: '3.x'
@@ -35,14 +31,6 @@ jobs:
         run: git clone https://github.com/Epicpkmn11/WordleDS.git
       - name: Switch Wordle DS Name List
         run: |
-          curl -O https://jazle.quest/static/js/main.17dd32f7.js
-          curl -O https://jazle.quest/static/js/main.17dd32f7.js.map
-
-          cd source-from-sourcemaps
-          pnpm i
-          node source-from-sourcemaps.js ../main.17dd32f7.js.map
-
-          cd ../
           deno run generate_words.ts
       - name: Build Wordle DS
         run: |
