@@ -31,7 +31,7 @@ jobs:
         run: git clone https://github.com/Epicpkmn11/WordleDS.git
       - name: Switch Wordle DS Name List
         run: |
-          deno run generate_words.ts
+          deno run --allow-write generate_words.ts
       - name: Build Wordle DS
         run: |
           cd WordleDS
