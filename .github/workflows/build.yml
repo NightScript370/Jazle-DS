@@ -35,8 +35,8 @@ jobs:
         run: git clone https://github.com/Epicpkmn11/WordleDS.git
       - name: Switch Wordle DS Name List
         run: |
-          curl -O https://jazle.quest/static/js/main.17dd32f7.js
-          curl -O https://jazle.quest/static/js/main.17dd32f7.js.map
+          wget https://jazle.quest/static/js/main.17dd32f7.js
+          wget https://jazle.quest/static/js/main.17dd32f7.js.map
 
           cd source-from-sourcemaps
           pnpm i
