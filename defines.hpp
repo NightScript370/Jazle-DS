@@ -13,7 +13,7 @@ static_assert(WORD_LEN > 0 && WORD_LEN <= 9, "WORD_LEN must be 1-9");
 static_assert(MAX_GUESSES > 0 && MAX_GUESSES <= 6, "MAX_GUESSES must be 1-6");
 
 // Used for the number in the TXT and the index in the word list
-#define FIRST_DAY 18797
+#define FIRST_DAY 19035
 
 // Used in the share message
 #define APP_NAME "Jazle DS"
