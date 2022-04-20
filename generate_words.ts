@@ -1,10 +1,25 @@
 import {WORDS} from "https://raw.githubusercontent.com/oradwell/jazle/main/src/constants/wordlist.ts"
 import {VALID_GUESSES} from "https://raw.githubusercontent.com/oradwell/jazle/main/src/constants/validGuesses.ts"
 
-const fileContent = `#include "words.hpp"
+const correctWords = [...new Set(WORDS)].map(word => `u"${word.toUpperCase()}"`);
+const validWords = [...new Set(VALID_GUESSES)].map(word => `u"${word.toUpperCase()}"`);
 
-std::array<const char16_t *, ${WORDS.length}> choices = {${(WORDS as string[]).map(word => `u"${word}"`).join(', ')}};
-std::array<const char16_t *, ${VALID_GUESSES.length}> guesses = {${(VALID_GUESSES as string[]).map(word => `u"${word}"`).join(', ')}};`;
+const wordsSource = `#include "words.hpp"
 
+std::array<const char16_t *, ${correctWords.length}> choices = {${correctWords.join(', ')}};
+std::array<const char16_t *, ${validWords.length}> guesses = {${validWords.join(', ')}};`;
+await Deno.writeTextFile('WordleDS/source/words.cpp', wordsSource);
 
-await Deno.writeTextFile('WordleDS/source/words.cpp', fileContent)
+const wordsHeader = `#ifndef WORDS_HPP
+#define WORDS_HPP
+
+#include <array>
+
+extern std::array<const char16_t *, ${correctWords.length}> choices;
+extern std::array<const char16_t *, ${validWords.length}> guesses;
+
+#endif // WORDS_HPP`;
+await Deno.writeTextFile('WordleDS/include/words.hpp', wordsHeader);
+
+await Deno.copyFile('./bgTop.png', 'WordleDS/gfx/bgTop.png')
+await Deno.copyFile('./howtoTop.png', 'WordleDS/gfx/howtoTop.png')
