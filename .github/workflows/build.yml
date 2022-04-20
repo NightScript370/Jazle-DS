@@ -1,0 +1,66 @@
+name: Build Jazle DS
+
+on:
+  push:
+    branches: ["*"]
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    branches: ["*"]
+    paths-ignore:
+      - 'README.md'
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: devkitpro/devkitarm
+    name: Build with Docker using devkitARM
+    steps:
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: vx.x.x
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          check-latest: true
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Download Wordle DS
+        run: git clone https://github.com/Epicpkmn11/WordleDS.git
+      - name: Switch Wordle DS Name List
+        run: |
+          curl -O https://jazle.quest/static/js/main.17dd32f7.js
+          curl -O https://jazle.quest/static/js/main.17dd32f7.js.map
+
+          cd source-from-sourcemaps
+          pnpm i
+          node source-from-sourcemaps.js ../main.17dd32f7.js.map
+
+          cd ../
+          deno run generate_words.ts
+      - name: Build Wordle DS
+        run: |
+          cd WordleDS
+          make
+
+          # Make CIA
+          curl -LO https://github.com/ihaveamac/ctr_toolkit/releases/download/make_cia6.4builds/make_cia6.4builds.zip
+          unzip -j make_cia6.4builds.zip linux/make_cia
+          ./make_cia --srl=WordleDS.dsi
+
+          # Move builds to dir for upload
+          mkdir artifacts
+          mv *.nds artifacts
+          mv *.dsi artifacts
+          mv *.cia artifacts
+      - name: Publish build to GH Actions
+        uses: actions/upload-artifact@v2
+        with:
+          path: "artifacts/*"
+          name: build

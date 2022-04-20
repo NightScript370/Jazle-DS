@@ -1,0 +1,3 @@
+[submodule "source-from-sourcemaps"]
+	path = source-from-sourcemaps
+	url = https://github.com/akx/source-from-sourcemaps
