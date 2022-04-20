@@ -23,3 +23,5 @@ await Deno.writeTextFile('WordleDS/include/words.hpp', wordsHeader);
 
 await Deno.copyFile('./bgTop.png', 'WordleDS/gfx/bgTop.png')
 await Deno.copyFile('./howtoTop.png', 'WordleDS/gfx/howtoTop.png')
+
+await Deno.copyFile('./defines.hpp', 'WordleDS/include/defines.hpp')
