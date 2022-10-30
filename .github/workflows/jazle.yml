@@ -29,9 +29,8 @@ jobs:
           deno run --allow-write --allow-read --allow-net jazle/process_safe.ts
       - name: Move Everything for packaging
         run: |
-          cd jazle
-          mkdir -p mod/jazle
-          mv mod.json mod/jazle/
+          mkdir -p jazle/mod/jazle
+          mv mod.json jazle/mod/jazle/
       - name: Publish build to GH Actions
         uses: actions/upload-artifact@v2
         with:
