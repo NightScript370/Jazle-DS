@@ -27,10 +27,12 @@ jobs:
       - name: Generate WordleDS mod files for Jazle
         run: |
           deno run --allow-write --allow-read --allow-net jazle/process_safe.ts
+          for f in ./jazle/resources/PNGs/*.png; do grit -gt -gB8 -gu8 -gzl -m -pn32 -ftr ./jazle/re$f; done
       - name: Move Everything for packaging
         run: |
           mkdir -p jazle/mod/jazle
           mv mod.json jazle/mod/jazle/
+          mv jazle/resources/PNGs/*.grf jazle/mod/jazle/
       - name: Publish build to GH Actions
         uses: actions/upload-artifact@v2
         with:
