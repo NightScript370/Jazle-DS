@@ -27,28 +27,16 @@ jobs:
           python-version: '2.x'
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Download Wordle DS
-        run: git clone https://github.com/Epicpkmn11/WordleDS.git
-      - name: Switch Wordle DS Name List
+      - name: Generate WordleDS mod files for Jazle
         run: |
+          cd jazle
           deno run --allow-write --allow-read generate_words.ts
-      - name: Build Wordle DS
+      - name: Move Everything for packaging
         run: |
-          cd WordleDS
-          make
-
-          # Make CIA
-          curl -LO https://github.com/ihaveamac/ctr_toolkit/releases/download/make_cia6.4builds/make_cia6.4builds.zip
-          unzip -j make_cia6.4builds.zip linux/make_cia
-          ./make_cia --srl=WordleDS.dsi
-
-          # Move builds to dir for upload
-          mkdir artifacts
-          mv *.nds artifacts
-          mv *.dsi artifacts
-          mv *.cia artifacts
+          mkdir -p mod/jazle
+          mv mod.json mod/jazle/
       - name: Publish build to GH Actions
         uses: actions/upload-artifact@v2
         with:
-          path: "WordleDS/artifacts/*"
-          name: build
+          path: "jazle/mod"
+          name: Mod ZIP
