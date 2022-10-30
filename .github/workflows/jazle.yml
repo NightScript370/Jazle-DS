@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Generate WordleDS mod files for Jazle
         run: |
-          deno run --allow-write --allow-read jazle/process_safe.ts
+          deno run --allow-write --allow-read --allow-net jazle/process_safe.ts
       - name: Move Everything for packaging
         run: |
           cd jazle
