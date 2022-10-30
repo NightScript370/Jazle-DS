@@ -13,11 +13,11 @@ modJSON.shareName = "Jazle DS";
 modJSON.creditStr = "Jazle DS\nby oliverradwell"
 
 modJSON.notWordMessage = STRINGS.WORD_NOT_FOUND_MESSAGE
-modJSON.guessMustContainX = STRING.NOT_CONTAINED_MESSAGE("%s")
-modJSON.lossMessage = STRING.CORRECT_WORD_MESSAGE("%s")
-modJSON.tooShortMessage = STRING.NOT_ENOUGH_LETTERS_MESSAGE
-modJSON.nthMustBeX = STRING.WRONG_SPOT_MESSAGE("%s", "%d%") //TypeError, I know
-modJSON.victoryMessages = STRING.WIN_MESSAGES
+modJSON.guessMustContainX = STRINGS.NOT_CONTAINED_MESSAGE("%s")
+modJSON.lossMessage = STRINGS.CORRECT_WORD_MESSAGE("%s")
+modJSON.tooShortMessage = STRINGS.NOT_ENOUGH_LETTERS_MESSAGE
+modJSON.nthMustBeX = STRINGS.WRONG_SPOT_MESSAGE("%s", "%d%") //TypeError, I know
+modJSON.victoryMessages = STRINGS.WIN_MESSAGES
 
 modJSON.wordleOffset = 235;
 modJSON.words = {guesses:validWords, choices:correctWords}
