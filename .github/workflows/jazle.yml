@@ -32,7 +32,7 @@ jobs:
         run: |
           mkdir -p jazle/mod/jazle
           mv mod.json jazle/mod/jazle/
-          mv jazle/resources/PNGs/*.grf jazle/mod/jazle/
+          for f in ./jazle/resources/PNGs/*.grf; do mv $f ./jazle/mod/jazle; done
       - name: Publish build to GH Actions
         uses: actions/upload-artifact@v2
         with:
