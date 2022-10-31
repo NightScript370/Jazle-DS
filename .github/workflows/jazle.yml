@@ -27,7 +27,7 @@ jobs:
       - name: Generate WordleDS mod files for Jazle
         run: |
           deno run --allow-write --allow-read --allow-net jazle/process_safe.ts
-          for f in ./jazle/resources/PNGs/*.png; do grit -gt -gB8 -gu8 -gzl -m -pn32 -ftr $f; done
+          grit jazle/resources/PNGs/*.png -gt -gB8 -gu8 -gzl -m -pn32 -ftr
       - name: Move Everything for packaging
         run: |
           mkdir -p jazle/mod/jazle
