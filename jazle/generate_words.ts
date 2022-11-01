@@ -5,8 +5,8 @@ import * as STRINGS from "https://raw.githubusercontent.com/oradwell/jazle/main/
 
 import defaultModJSON from "https://raw.githubusercontent.com/Epicpkmn11/WordleDS/mods/examples/No%20spoilers/mod.json" assert { type: "json" }
 
-const correctWords = [...new Set(WORDS)].map(word => `u"${word.toUpperCase()}"`);
-const validWords = [...new Set(VALID_GUESSES)].map(word => `u"${word.toUpperCase()}"`);
+const correctWords = WORDS.map(word => word.toUpperCase());
+const validWords = VALID_GUESSES.map(word => word.toUpperCase());
 
 const modJSON = Object.assign({}, defaultModJSON);
 modJSON.shareName = "Jazle DS";
